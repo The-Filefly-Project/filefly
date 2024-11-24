@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "client:dev": "npm run dev --prefix ./client",
+    "client:build": "npm run build --prefix ./client",
+    "client:preview": "npm run preview --prefix ./client"
   },
   "dependencies": {
     "pinia": "^2.2.6",
