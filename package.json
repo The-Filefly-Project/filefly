@@ -6,13 +6,15 @@
   "scripts": {
     "client:dev": "npm run dev --prefix ./client",
     "client:build": "npm run build --prefix ./client",
-    "client:preview": "npm run preview --prefix ./client"
+    "client:preview": "npm run preview --prefix ./client",
+    "server:dev": "tsc --watch --project ./server/"
   },
   "dependencies": {
     "pinia": "^2.2.6",
     "vue": "^3.5.12"
   },
   "devDependencies": {
+    "@types/node": "^22.9.3",
     "@vitejs/plugin-vue": "^5.1.4",
     "sass-embedded": "^1.81.0",
     "typescript": "~5.6.2",
