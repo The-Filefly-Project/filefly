@@ -10,6 +10,7 @@
     "server:dev": "tsc --watch --project ./server/"
   },
   "dependencies": {
+    "logging": "github:The-Filefly-Project/logging",
     "pinia": "^2.2.6",
     "vue": "^3.5.12"
   },
