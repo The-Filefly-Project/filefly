@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      chalk:
+        specifier: ^5.3.0
+        version: 5.3.0
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
       logging:
         specifier: github:The-Filefly-Project/logging
         version: https://codeload.github.com/The-Filefly-Project/logging/tar.gz/881278ab512ec03a07bb389ea8a1e4c16f8d485b(@types/node@22.9.3)(sass-embedded@1.81.0)
@@ -17,7 +23,13 @@ importers:
       vue:
         specifier: ^3.5.12
         version: 3.5.13(typescript@5.6.3)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
+      '@types/js-yaml':
+        specifier: ^4.0.9
+        version: 4.0.9
       '@types/node':
         specifier: ^22.9.3
         version: 22.9.3
@@ -300,6 +312,9 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
+  '@types/js-yaml@4.0.9':
+    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
+
   '@types/node@22.9.3':
     resolution: {integrity: sha512-F3u1fs/fce3FFk+DAxbxc78DF8x0cY09RRL8GnXLmkJ1jvx3TtPdWoTT5/NiYfI5ASqXBmfqJi9dZ3gxMx4lzw==}
 
@@ -396,6 +411,9 @@ packages:
 
   alien-signals@0.2.2:
     resolution: {integrity: sha512-cZIRkbERILsBOXTQmMrxc9hgpxglstn69zm+F1ARf4aPAzdAFYd6sBq87ErO0Fj3DV94tglcyHG5kQz9nDC/8A==}
+
+  argparse@2.0.1:
+    resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
   assertion-error@2.0.1:
     resolution: {integrity: sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==}
@@ -528,6 +546,10 @@ packages:
   is-stream@2.0.1:
     resolution: {integrity: sha512-hFoiJiTl63nn+kstHGBtewWSKnQLpyb155KHheA1l39uvtO9nWIop1p3udqPcUd/xbF1VLMO4n7OI6p7RbngDg==}
     engines: {node: '>=8'}
+
+  js-yaml@4.1.0:
+    resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
+    hasBin: true
 
   kuler@2.0.0:
     resolution: {integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==}
@@ -933,6 +955,9 @@ packages:
     resolution: {integrity: sha512-DLiFIXYC5fMPxaRg832S6F5mJYvePtmO5G9v9IgUFPhXm9/GkXarH/TUrBAVzhTCzAj9anE/+GjrgXp/54nOgw==}
     engines: {node: '>= 12.0.0'}
 
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
 snapshots:
 
   '@babel/helper-string-parser@7.25.9': {}
@@ -1085,6 +1110,8 @@ snapshots:
 
   '@types/estree@1.0.6': {}
 
+  '@types/js-yaml@4.0.9': {}
+
   '@types/node@22.9.3':
     dependencies:
       undici-types: 6.19.8
@@ -1224,6 +1251,8 @@ snapshots:
 
   alien-signals@0.2.2: {}
 
+  argparse@2.0.1: {}
+
   assertion-error@2.0.1: {}
 
   async@3.2.6: {}
@@ -1347,6 +1376,10 @@ snapshots:
   is-arrayish@0.3.2: {}
 
   is-stream@2.0.1: {}
+
+  js-yaml@4.1.0:
+    dependencies:
+      argparse: 2.0.1
 
   kuler@2.0.0: {}
 
@@ -1730,3 +1763,5 @@ snapshots:
       stack-trace: 0.0.10
       triple-beam: 1.4.1
       winston-transport: 4.9.0
+
+  zod@3.23.8: {}

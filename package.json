@@ -10,11 +10,15 @@
     "server:dev": "tsc --watch --project ./server/"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
+    "js-yaml": "^4.1.0",
     "logging": "github:The-Filefly-Project/logging",
     "pinia": "^2.2.6",
-    "vue": "^3.5.12"
+    "vue": "^3.5.12",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.9.3",
     "@vitejs/plugin-vue": "^5.1.4",
     "sass-embedded": "^1.81.0",

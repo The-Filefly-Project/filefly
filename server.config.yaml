@@ -1,0 +1,11 @@
+# Logging configuration
+logging:
+  # Console log level (one of: crit, error, warn, notice, info, http, debug)
+  consoleLogLevel: debug
+  # File log level (one of: crit, error, warn, notice, info, http, debug)
+  fileLogLevel: debug
+  # Maximum file size (in bytes or human-readable format - 10MB, 1GB, etc...)
+  maxFileSize: 10MB
+  # Maximum number of log files to keep or number of days to keep track of.
+  # use a "d" suffix for days and a regular number for a number of files.
+  maxFiles: 5
