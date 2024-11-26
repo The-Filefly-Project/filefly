@@ -1,11 +1,41 @@
 # Logging configuration
 logging:
-  # Console log level (one of: crit, error, warn, notice, info, http, debug)
-  consoleLogLevel: debug
-  # File log level (one of: crit, error, warn, notice, info, http, debug)
-  fileLogLevel: debug
-  # Maximum file size (in bytes or human-readable format - 10MB, 1GB, etc...)
-  maxFileSize: 10MB
-  # Maximum number of log files to keep or number of days to keep track of.
-  # use a "d" suffix for days and a regular number for a number of files.
-  maxFiles: 5
+    # Console log level (one of: crit, error, warn, notice, info, http, debug)
+    consoleLogLevel: debug
+    # File log level (one of: crit, error, warn, notice, info, http, debug)
+    fileLogLevel: debug
+    # Maximum file size (in bytes or human-readable format - 10MB, 1GB, etc...)
+    maxFileSize: 10MB
+    # Maximum number of log files to keep or number of days to keep track of.
+    # use a "d" suffix for days and a regular number for a number of files.
+    maxFiles: 5
+
+accounts:
+    # Minimum username length in characters
+    usernameMinLength: 8
+    # Maximum username length in characters
+    usernameMaxLength: 64
+    # Minimum password length in characters
+    passwordMinLength: 8
+    # Whether to force at least one number in every newly created user's password.
+    passwordNumbers: true
+    # Whether to force at least one uppercase and one lowercase letter in every newly created user's password.
+    passwordBigLittleSymbols: true
+    # Whether to force at least one special character in every newly created user's password.
+    passwordSpecialChars: true
+    # The number of rounds to use for hashing the user's password.
+    passwordSaltRounds: 10
+
+sessions:
+    # The duration of a default short session in seconds.
+    # A session like this is created by default on every login,
+    # unless "remember me" is checked.
+    shortDuration: 60
+    # The duration of a long session - In days.
+    # A session like this is created when "remember me" is checked.
+    longDuration: 30
+    # The duration of an elevated session - In minutes.
+    # No administrator session can actually access any of the
+    # administrative tools unless their session is elevated by
+    # resubmitting their password.
+    elevatedDuration: 5

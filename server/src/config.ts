@@ -27,6 +27,20 @@ const ZConfig = object({
         fileLogLevel:    ZLogLevel,
         maxFileSize:     union([ number(), string() ]),
         maxFiles:        union([ number(), string() ])
+    }),
+    accounts: object({
+        usernameMinLength:          number(),
+        usernameMaxLength:          number(),
+        passwordMinLength:          number(),
+        passwordNumbers:            boolean(),
+        passwordBigLittleSymbols:   boolean(),
+        passwordSpecialChars:       boolean(),
+        passwordSaltRounds:         number()
+    }),
+    sessions: object({
+        shortDuration: number(),
+        longDuration:  number(),
+        elevatedDuration: number()
     })
 })
 
