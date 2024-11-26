@@ -17,4 +17,49 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    background-color: var(--bg-primary);
+
+    // Theme =====================
+
+    --bg-primary:   #09090B;
+    --bg-accent:    #27272A;
+
+    --fg-bright:    #FAFAFA;
+    --fg-dim:       #A1A1AA;
+
+    --bdc-primary:  #27272A;
+    --bdc-accent:   #434349;
+    --bdc-focus:    #fafafa;
+
+    --bdr-1:        0.2rem;
+    --bdr-2:        0.4rem;
+
+    --gap-1:        0.4rem;
+    --gap-2:        0.7rem;
+    --gap-3:        1.0rem;
+    --gap-4:        1.2rem;
+    --gap-5:        1.35rem;
+
 }
+
+// Utility classes ========================================
+
+// --- Colors ---
+
+// Background color
+.bg-p { background-color: var(--bg-primary); }
+.bg-a { background-color: var(--bg-accent); }
+
+// Foreground color
+.fg-b { background-color: var(--bg-bright); }
+.fg-d { background-color: var(--bg-dim); }
+
+// Border color
+.bdc-p { border-color: var(--bdc-primary); }
+.bdc-a { border-color: var(--bdc-accent); }
+.bdc-f { border-color: var(--bdc-focus); }
+
+// --- Font sizing ---
+
+// --- Margins ---
