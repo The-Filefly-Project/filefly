@@ -11,8 +11,6 @@ import Logger                                   from 'logging'
 import Config                                   from '../config.js'
 
 let out: ReturnType<typeof Logger.getScope>
-
-const filename = url.fileURLToPath(import.meta.url)
 const dirname  = url.fileURLToPath(new URL('.', import.meta.url))
 
 // Types ======================================================================
@@ -219,7 +217,7 @@ export default class UserAccount {
             if (error) return undefined
             return users.find(user => user.userID === userID)
         } 
-        catch (error) {
+        catch {
             return undefined
         }
     }
