@@ -1,0 +1,22 @@
+{
+    "plugins": [
+        "prettier-plugin-tailwindcss"
+    ],
+    "tailwindConfig": "./tailwind.config.js",
+    "jsxSortTailwindClasses": true,
+    "overrides": [
+        {
+            "files": "*.tsx",
+            "options": {
+                "pluginSearchDirs": [
+                    "."
+                ]
+            }
+        }
+    ],
+    "semi": false,
+    "singleQuote": false,
+    "bracketSpacing": false,
+    "trailingComma": "none",
+    "printWidth": 1000000
+}

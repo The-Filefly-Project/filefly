@@ -117,7 +117,7 @@ export default class UserAccount {
         try {
             
             if (!this.TCreateParams.safeParse(user).success) return 'ERR_BAD_ENTRY'
-            out.notice(`UserAccount.create user:${user.name}, root:${user.root}`)
+            out.notice(`UserAccount.create() user:${user.name}, root:${user.root}`)
 
             // Check if name is taken
             if (await this.exists(user.name)) return 'ERR_NAME_TAKEN'
@@ -125,13 +125,13 @@ export default class UserAccount {
             // Check against username and password security requirements
             if (!skipChecks) {
                 const { accounts } = Config.$
-                if (accounts.usernameMinLength                    > user.name.length) return 'ERR_NAME_TOO_SHORT'
-                if (accounts.usernameMaxLength                    < user.name.length) return 'ERR_NAME_TOO_LONG'
-                if (accounts.passwordMinLength                    > user.pass.length) return 'ERR_PASS_TOO_SHORT'
-                if (accounts.passwordNumbers             && !/[0-9]/.test(user.pass)) return 'ERR_PASS_NO_NUMS'
-                if (accounts.passwordBigLittleSymbols    && !/[A-Z]/.test(user.pass)) return 'ERR_PASS_NO_BIG_CHARS'
-                if (accounts.passwordBigLittleSymbols    && !/[a-z]/.test(user.pass)) return 'ERR_PASS_NO_SMALL_CHARS'
-                if (accounts.passwordSpecialChars        && !/\W/.test(user.pass))    return 'ERR_PASS_NO_SPECIAL_CHARS'
+                if (accounts.usernameMinLength                 > user.name.length) return 'ERR_NAME_TOO_SHORT'
+                if (accounts.usernameMaxLength                 < user.name.length) return 'ERR_NAME_TOO_LONG'
+                if (accounts.passwordMinLength                 > user.pass.length) return 'ERR_PASS_TOO_SHORT'
+                if (accounts.passwordNumbers          && !/[0-9]/.test(user.pass)) return 'ERR_PASS_NO_NUMS'
+                if (accounts.passwordBigLittleSymbols && !/[A-Z]/.test(user.pass)) return 'ERR_PASS_NO_BIG_CHARS'
+                if (accounts.passwordBigLittleSymbols && !/[a-z]/.test(user.pass)) return 'ERR_PASS_NO_SMALL_CHARS'
+                if (accounts.passwordSpecialChars     && !/\W/   .test(user.pass)) return 'ERR_PASS_NO_SPECIAL_CHARS'
             }
             
             const pwdHash = await bcrypt.hash(user.pass, Config.$.accounts.passwordSaltRounds)
@@ -147,11 +147,11 @@ export default class UserAccount {
                 lastLoginISO: null
             })
 
-            out.notice(`UserAccount.create successful | user:${user.name}, root:${user.root}, uuid:${userID}`)
+            out.notice(`UserAccount.create() successful | user:${user.name}, root:${user.root}, uuid:${userID}`)
 
         } 
         catch (error) {
-            out.error(`UserAccount.create error:`, error as Error)
+            out.error(`UserAccount.create() error:`, error as Error)
             return error as Error
         }
     }
@@ -167,7 +167,7 @@ export default class UserAccount {
         try {
 
             ZString.parse(name)
-            out.notice(`UserAccount.delete > "${name.toString()}"`)
+            out.notice(`UserAccount.delete() > "${name.toString()}"`)
 
             // Check if user exists
             if (await this.exists(name) === false) return 'ERR_USER_NOT_FOUND'
@@ -179,7 +179,7 @@ export default class UserAccount {
             if (admins.length === 1) return 'ERR_CANT_DEL_LAST_ADMIN'
 
             await this.slAccounts.del(name)
-            out.notice(`UserAccount.delete > successful | user:"${name.toString()}"`)
+            out.notice(`UserAccount.delete() > successful | user:"${name.toString()}"`)
             
         }
         catch (error) {
@@ -195,7 +195,7 @@ export default class UserAccount {
      */
     public static async get(name: string): Promise<TUserAccountData | undefined> {
         try {
-            out.debug(`UserAccount.get > "${name.toString()}"`)
+            out.debug(`UserAccount.get() > "${name.toString()}"`)
             const user = await this.slAccounts.get(name) as TUserAccountData
             user.username = name
             return user
