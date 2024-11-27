@@ -1,15 +1,9 @@
 // Imports ====================================================================
 
-import url          from 'node:url'
 import Logger       from 'logging'
-import Config       from '../config.js'
-import type z       from 'zod'
 import UserAccount, { TUserPreferences }  from './userAccounts.js'
 
 let out: ReturnType<typeof Logger.getScope>
-
-const filename = url.fileURLToPath(import.meta.url)
-const dirname  = url.fileURLToPath(new URL('.', import.meta.url))
 
 // Types ======================================================================
 

@@ -1,16 +1,12 @@
 // Imports ====================================================================
 
 import crypto       from 'node:crypto'
-import url          from 'node:url'
 import bcrypt       from 'bcrypt'
 import UserAccount  from "./userAccounts.js"
 import logging      from "logging"
 import Config       from '../config.js'
 
 let out: ReturnType<typeof logging.getScope>
-
-const filename = url.fileURLToPath(import.meta.url)
-const dirname  = url.fileURLToPath(new URL('.', import.meta.url))
 
 // Types ======================================================================
 
