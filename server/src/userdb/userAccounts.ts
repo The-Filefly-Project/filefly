@@ -147,7 +147,7 @@ export default class UserAccount {
                 lastLoginISO: null
             })
 
-            out.notice(`UserAccount.create() successful | user:${user.name}, root:${user.root}, uuid:${userID}`)
+            out.notice(`UserAccount.create() successful | user:${user.name}, root:${user.root}, id:${userID}`)
 
         } 
         catch (error) {

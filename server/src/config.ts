@@ -41,6 +41,28 @@ const ZConfig = object({
         shortDuration: number(),
         longDuration:  number(),
         elevatedDuration: number()
+    }),
+    http: object({
+        host: string(),
+        port: number()
+    }),
+    ssl: object({
+        useEncryption:      boolean(),
+        certificateSource:  union([ literal('self-signed'), literal('external') ]),
+        external: object({
+            certificate:    string().optional(),
+            privateKey:     string().optional()
+        }),
+        selfSigned: object({
+            lifetimeDays:       number(),
+            advancePregegen:    number(),
+            algorithm:          union([ literal('sha256'), literal('sha384'), literal('sha512') ]),
+            keySize:            number(),
+            commonName:         string(),
+            countryName:        string(),
+            localityName:       string(),
+            organizationName:   string()
+        })
     })
 })
 

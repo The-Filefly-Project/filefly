@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/Inter-variable.ttf") format("truetype");
+}
+
+:root {
+    font-family: "Inter", system-ui, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 600;
+    font-size: 20px;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background-color: var(--bg-primary);
+
+    /* Theme ===================== */
+
+    --bg: #09090b;
+    --bg-accent: #27272a;
+
+    --fg: #fafafa;
+    --fg-dim: #a1a1aa;
+
+    --b-primary: #27272a;
+    --b-accent: #434349;
+    --b-focus: #fafafa;
+}

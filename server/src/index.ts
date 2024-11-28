@@ -8,6 +8,7 @@ import LoggerInstance   from "logging"
 import Util             from "./util.js"
 import Config           from "./config.js"
 import UserAccounts     from './userdb/userAccounts.js'
+import HttpServer       from "./http/server.js"
 
 const dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
@@ -27,20 +28,26 @@ const dirname = path.dirname(url.fileURLToPath(import.meta.url))
             fileLogLevel: Config.$.logging.fileLogLevel,
             maxLogFileSize: Config.$.logging.maxFileSize,
             maxLogFileCount: Config.$.logging.maxFiles,
-            dirname: path.join(dirname, '../../')
+            dirname: path.join(dirname, '../../'),
+            stackDepth: 3
         })
         if (e2) throw e2
  
         // User accounts database
         const e3 = await UserAccounts.open()
         if (e3) throw e3
+
+        // HTTP server
+        const e4 = await HttpServer.start()
+        if (e4) throw e4
         
         LoggerInstance.getScope(import.meta.url)
             .info('Finished initialization.')
 
     } 
     catch (error) {
-        Util.silence(() => LoggerInstance.getScope(import.meta.url).crit(error as Error))
-        throw error
+        const failedToLog = Util.muffle(() => LoggerInstance.getScope(import.meta.url).crit(error as Error))
+        if (failedToLog) throw error
+        process.exit(1)
     }
 })()

@@ -6,4 +6,9 @@ export default class Util {
         catch { /* empty */ }
     }
 
+    public static muffle(callback: () => any) {
+        try { callback() } 
+        catch (error) { return error as Error }
+    }
+
 }

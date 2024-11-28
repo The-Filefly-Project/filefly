@@ -1,4 +1,4 @@
-# Logging configuration
+# Logging configuration ===========================================================================
 logging:
     # Console log level (one of: crit, error, warn, notice, info, http, debug)
     consoleLogLevel: debug
@@ -10,6 +10,7 @@ logging:
     # use a "d" suffix for days and a regular number for a number of files.
     maxFiles: 5
 
+# User accounts security configuration ============================================================
 accounts:
     # Minimum username length in characters
     usernameMinLength: 8
@@ -26,6 +27,7 @@ accounts:
     # The number of rounds to use for hashing the user's password.
     passwordSaltRounds: 10
 
+# User session settings ===========================================================================
 sessions:
     # The duration of a default short session in seconds.
     # A session like this is created by default on every login,
@@ -39,3 +41,45 @@ sessions:
     # administrative tools unless their session is elevated by
     # resubmitting their password.
     elevatedDuration: 5
+
+# Server configuration ============================================================================
+http:
+    # The specific
+    host: 0.0.0.0
+    port: 443
+
+# SSL & encryption configuration ==================================================================
+ssl:
+    # Whether to use encryption.
+    # If false, the server will use HTTP, if true, it will use HTTPS
+    useEncryption: true
+    # The source of the SSL certificate. One of: self-signed, external.
+    # self-signed - The server will generate its own SSL certificates periodically.
+    # external - The server will use the SSL certificates provided by the user.
+    certificateSource: self-signed
+    # External SSL certificate and key locations
+    external:
+        certificate: /etc/ssl/cert.pem
+        privateKey: /etc/ssl/key.pem
+    # Self-signed certificate configuration
+    selfSigned:
+        # The number of days to keep the self-signed certificate valid.
+        lifetimeDays: 365
+        # Specifies how many days from the expiration of the current certificate
+        # a new one should be generated. Note the newly generated certificate will
+        # not load until the server is restarted.
+        advancePregegen: 30
+        # The encryption algorithm used for the certificate.
+        # One of: sha256, sha384, sha512
+        algorithm: sha256
+        # Key size used for packet encryption. The higher, the stronger the encryption, traffic latency.
+        # One of: 1024, 2048, 4096, 8192, ...
+        keySize: 4096
+        # Certificate owner's name.
+        commonName: Filefly
+        # Certificate owner's country
+        countryName: N/A
+        # Certificate owner's operating locality, such as state or province.
+        localityName: N/A
+        # Certificate owner's organization
+        organizationName: N/A
