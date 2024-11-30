@@ -46,13 +46,13 @@ sessions:
 http:
     # The specific
     host: 0.0.0.0
-    port: 443
+    port: 80
 
 # SSL & encryption configuration ==================================================================
 ssl:
     # Whether to use encryption.
     # If false, the server will use HTTP, if true, it will use HTTPS
-    useEncryption: true
+    useEncryption: false
     # The source of the SSL certificate. One of: self-signed, external.
     # self-signed - The server will generate its own SSL certificates periodically.
     # external - The server will use the SSL certificates provided by the user.

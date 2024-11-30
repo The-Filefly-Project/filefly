@@ -9,6 +9,7 @@ import Util             from "./util.js"
 import Config           from "./config.js"
 import UserAccounts     from './userdb/userAccounts.js'
 import HttpServer       from "./http/server.js"
+import UserSession from './userdb/userSessions.js'
 
 const dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
@@ -37,9 +38,13 @@ const dirname = path.dirname(url.fileURLToPath(import.meta.url))
         const e3 = await UserAccounts.open()
         if (e3) throw e3
 
-        // HTTP server
-        const e4 = await HttpServer.start()
+        // User accounts database
+        const e4 = await UserSession.open()
         if (e4) throw e4
+
+        // HTTP server
+        const e5 = await HttpServer.start()
+        if (e5) throw e5
         
         LoggerInstance.getScope(import.meta.url)
             .info('Finished initialization.')

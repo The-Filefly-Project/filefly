@@ -7,16 +7,18 @@ export default {
     theme: {
         extend: {
             colors: {
-                // Because screw line #2 in .prettierignore
-                "bg1": /*    */ "var(--bg-primary)",
-                "bg2": /*    */ "var(--bg-accent)",
-                "fg1": /*    */ "var(--fg)",
-                "fg2": /*    */ "var(--fg-dim)",
-                "border1": /**/ "var(--b-primary)",
-                "border2": /**/ "var(--b-accent)",
-                "borderF": /**/ "var(--b-focus)",
+                "bg1":     "var(--bg-primary)",
+                "bg2":     "var(--bg-accent)",
+                "fg1":     "var(--fg)",
+                "fg2":     "var(--fg-dim)",
+                "b1":      "var(--b-primary)",
+                "b2":      "var(--b-accent)",
+                "bF":      "var(--b-focus)",
 
-            }
+            },
+            fontSize: {
+                'xxs': '.6rem',
+            },
         },
     },
     plugins: [],

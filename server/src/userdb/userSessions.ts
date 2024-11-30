@@ -48,8 +48,8 @@ export default class UserSession {
     /** Session ID byte size */
     public static sidLength = 64
 
-    public static async open() {
-        if (!out) out = logging.getScope(import.meta.url)
+    public static async open(): EavSA {
+        out = logging.getScope(import.meta.url)
         this.sct = setInterval(() => {
             this._performCleanup()
         }, this.sci)
