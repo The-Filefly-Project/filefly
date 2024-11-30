@@ -1,9 +1,8 @@
 # Won't ignore it. Why? No idea.
 tailwind.config.js
 
-.vscode/
-build/
-node_modules/
-public/
-server/
-app/
+.vscode/*
+build/*
+node_modules/*
+public/*
+server/*

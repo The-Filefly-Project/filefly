@@ -7,7 +7,7 @@ import https         from 'https'
 import express       from 'express'
 import Config        from '../config.js'
 import SSL           from './ssl/ssl.js'
-import Logger       from 'logging'
+import Logger        from 'logging'
 import bodyParser    from 'body-parser'
 import cookieParser  from 'cookie-parser'
 import requestLogger from './middleware/requestLogger.js'
@@ -19,13 +19,14 @@ const dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 export type TMiddleware     = (req: express.Request, res: express.Response, next: express.NextFunction) => any
 export type TRequestHandler = (req: express.Request, res: express.Response) => any
+export type TRequestSetup   = () => TRequestHandler
 
 // Endpoints ==================================================================
 
 // ==== SESSION ====
-// import newSession   from './_post/newSession.js'
-// import renewSession from './_get/renewSession.js'
-// import sessionInfo  from './_get/sessionInfo.js'
+import sessionNew   from './handlers/sessionNew.post.js'
+import sessionRenew from './handlers/sessionRenew.get.js'
+import sessionInfo  from './handlers/sessionInfo.get.js'
 
 // Code =======================================================================
 
@@ -82,9 +83,9 @@ export default class HttpServer {
         this.app.use(requestLogger.logger)
         this.app.use('/api/v1', router)
 
-        // router.post('/session/new', newSession)
-        // router.get('/session/renew', renewSession)
-        // router.get('/session/info', sessionInfo)
+        router.post('/session/new', sessionNew())
+        router.get('/session/renew', sessionRenew())
+        router.get('/session/info', sessionInfo())
 
 
     }

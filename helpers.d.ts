@@ -1,4 +1,4 @@
-/** 
+/**
  * GO-like error-as-value return type. Used specifically to avoid
  * throwing errors which generally produce messy control flow.
  */
@@ -14,9 +14,9 @@ declare type EavA<V, E = Error> = Promise<Eav<V, E>>
  */
 declare type EavS<E = Error> = E | void
 
-/** 
+/**
  * Async implementation of `EavS<error>`.
-*/
+ */
 declare type EavSA<E = Error> = Promise<EavS<E>>
 
 /**s
@@ -24,9 +24,9 @@ declare type EavSA<E = Error> = Promise<EavS<E>>
  */
 declare type Values<T> = T[keyof T]
 
-/** 
+/**
  * Makes selected keys optional.
-*/
+ */
 declare type Optional<O, K extends keyof O> = Omit<O, K> & Partial<Pick<O, K>>
 
 /** Describes some levelDB error objects. */

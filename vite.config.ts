@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import {defineConfig} from "vite"
+import react from "@vitejs/plugin-react"
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -8,7 +8,7 @@ export default defineConfig({
         outDir: "./build/spa/"
     },
     server: {
-        // For development only, so the live reload enabled 
+        // For development only, so the live reload enabled
         // page can access the actual server's APIs.
         proxy: {
             "/api/v1": "http://localhost"
