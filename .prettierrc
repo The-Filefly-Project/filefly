@@ -18,5 +18,5 @@
     "singleQuote": false,
     "bracketSpacing": false,
     "trailingComma": "none",
-    "printWidth": 1000000
+    "printWidth": 140
 }
