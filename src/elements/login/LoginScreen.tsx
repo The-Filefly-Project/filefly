@@ -1,5 +1,6 @@
 import React, {forwardRef, HTMLInputTypeAttribute, useRef, useState} from "react"
 import User from "../../lib/User"
+import Switch from "../lib/Switch"
 
 export default function LoginScreen() {
     const nameInput = useRef<HTMLInputElement>(null)
@@ -25,10 +26,15 @@ export default function LoginScreen() {
                     <TextInput type="text" label="Username" ref={nameInput} />
                     <TextInput type="password" label="Password" ref={passInput} />
 
-                    <input type="checkbox" ref={typeInput} />
-                    <label className="inline-block text-xs">Remember me</label>
+                    <div className="mt-6 flex items-center gap-4">
+                        <Switch ref={typeInput} />
+                        <label className="inline text-sm">Remember me</label>
+                    </div>
 
-                    <button type="submit" className="block">
+                    <button
+                        type="submit"
+                        className="mt-10 block w-full rounded-lg border-2 border-c2 bg-transparent px-8 py-2 text-sm transition-colors hover:bg-c2"
+                    >
                         Login
                     </button>
                 </form>
@@ -46,7 +52,7 @@ const TextInput = forwardRef<HTMLInputElement, React.PropsWithChildren & {type: 
 
     const style = {
         transform: `translateY(${active || busy ? "0" : "1rem"})`,
-        color: active || busy ? "var(--fg-dim)" : "var(--fg)"
+        color: active || busy ? "var(--c3)" : "var(--c3)"
     }
 
     return (
@@ -57,11 +63,11 @@ const TextInput = forwardRef<HTMLInputElement, React.PropsWithChildren & {type: 
             <input
                 type={props.type}
                 ref={ref}
-                className="mb-3 block w-full border-b-2 border-b1 bg-transparent text-sm outline-none transition-all focus:border-b2"
+                className="focus:border-b4 mb-3 block w-full border-b-2 border-c2 bg-transparent text-base outline-none transition-all"
                 onFocus={focus}
                 onBlur={blur}
                 onInput={(e) => setBusy(e.currentTarget.value)}
-            />{" "}
+            />
         </>
     )
 })

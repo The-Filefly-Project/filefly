@@ -7,18 +7,22 @@ export default {
     theme: {
         extend: {
             colors: {
-                "bg1":     "var(--bg-primary)",
-                "bg2":     "var(--bg-accent)",
-                "fg1":     "var(--fg)",
-                "fg2":     "var(--fg-dim)",
-                "b1":      "var(--b-primary)",
-                "b2":      "var(--b-accent)",
-                "bF":      "var(--b-focus)",
-
+                c1: "var(--c1)",
+                c2: "var(--c2)",
+                c3: "var(--c3)",
+                c4: "var(--c4)",
+                c1e: "var(--c1e)",
+                c2e: "var(--c2e)",
+                c3e: "var(--c3e)",
+                c4e: "var(--c4e)",
+                cp: "var(--cp)",
             },
             fontSize: {
-                'xxs': '.6rem',
+                'xxs': '.7rem',
             },
+            borderWidth: {
+                1: '1px',
+            }
         },
     },
     plugins: [],

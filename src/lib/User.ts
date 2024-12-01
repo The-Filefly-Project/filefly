@@ -12,13 +12,12 @@ type UserSession = Partial<TSessionInfo>
 
 export default class User {
 
-    public static session = createStore<UserSession>()((set) => ({
+    public static session = createStore<UserSession>()(() => ({
         username: undefined,
         root: undefined,
         type: undefined,
         createdISO: undefined,
         updatedISO: undefined,
-        setSession: (session: Required<UserSession>) => set(session)
     }))
 
 
