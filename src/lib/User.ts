@@ -38,7 +38,7 @@ export default class User {
                 body: JSON.stringify({ user, pass, long })
             })
             if (res.status === 400) return new ClientError('USER_BAD_REQUEST',      'An error occurred while processing the request.', null, { statusCode: res.status }) 
-            if (res.status === 401) return new ClientError('USER_LOGIN_AUTH_ERROR', 'Failed to log in due to server or auth error.',   null, { statusCode: res.status }) 
+            if (res.status === 401) return new ClientError('USER_LOGIN_AUTH_ERROR', 'Wrong password or username.',                     null, { statusCode: res.status }) 
             if (res.status === 500) return new ClientError('USER_SERVER_ERROR',     'Server error.',                                   null, { statusCode: res.status })
             
             const infoError = await this.getSessionInfo()

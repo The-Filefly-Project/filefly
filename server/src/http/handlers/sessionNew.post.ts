@@ -40,9 +40,10 @@ const sessionNew: TRequestSetup = () => {
                 : res.status(500).end()
 
             res.cookie('sid', SID, {
+                httpOnly: true,
                 maxAge: long
                     ? Config.$.sessions.longDuration  * 1000 * 60 * 60 * 24
-                    : Config.$.sessions.shortDuration * 1000 * 60
+                    : Config.$.sessions.shortDuration * 1000 * 60,
             })
             .status(200)
             .end()

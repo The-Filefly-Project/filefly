@@ -19,6 +19,11 @@ declare type EavS<E = Error> = E | void
  */
 declare type EavSA<E = Error> = Promise<EavS<E>>
 
+declare type ReturnS<T> = ReturnType<T>
+declare type ReturnSA<T> = Awaited<ReturnType<T>>
+declare type ReturnA<T> = Awaited<ReturnType<T>>[0]
+
+
 /**s
  * Extracts enum values.
  */
