@@ -12,7 +12,7 @@ declare type EavA<V, E = Error> = Promise<Eav<V, E>>
 /**
  * Single-value function return type.
  */
-declare type EavS<E = Error> = E | void
+declare type EavS<E = Error> = E | undefined
 
 /**
  * Async implementation of `EavS<error>`.

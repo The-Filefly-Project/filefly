@@ -10,13 +10,16 @@ export default function LoginScreen() {
     const typeInput = useRef<HTMLInputElement>(null)
 
     const [error, setError] = React.useState<ReturnSA<typeof User.login> | null>(null)
+    const [errorCount, setErrorCount] = React.useState(0)
 
     const login = async (e: React.FormEvent) => {
         e.preventDefault()
         if (nameInput.current && passInput.current && typeInput.current) {
             const long = typeInput.current.checked
-            const error = await User.login(nameInput.current.value, passInput.current.value, long)
-            setError(error)
+            const currentError = await User.login(nameInput.current.value, passInput.current.value, long)
+            setError(currentError)
+            setErrorCount(currentError ? errorCount + 1 : 0)
+            if (currentError && error && currentError.code !== error.code) setErrorCount(1)
         }
     }
 
@@ -44,12 +47,11 @@ export default function LoginScreen() {
                         Login
                     </button>
 
-                    {error ? (
-                        <Card className="mt-10">
+                    {error && (
+                        <Card className="mt-10" icon="warning" iconClass="text-c3">
                             <p className="text-center text-sm">{error.message}</p>
+                            {errorCount > 1 && <span className="mt-2 block w-full text-center text-xs text-cp">(x{errorCount})</span>}
                         </Card>
-                    ) : (
-                        ""
                     )}
                 </form>
             </div>
