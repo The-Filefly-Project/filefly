@@ -1,42 +1,51 @@
-import React, {useRef} from "react"
+import React, {useRef, useState} from "react"
 import User from "../../lib/User"
-import Switch from "../lib/Switch"
-import TextInputFancy from "../lib/TextInputFancy"
-import Card from "../lib/Card"
+import Switch from "../ui/Switch"
+import TextInputFancy from "../ui/TextInputFancy"
+import Card from "../ui/Card"
+import ClientError from "../../lib/Error"
 
 export default function LoginScreen() {
-    const nameInput = useRef<HTMLInputElement>(null)
-    const passInput = useRef<HTMLInputElement>(null)
-    const typeInput = useRef<HTMLInputElement>(null)
-
-    const [error, setError] = React.useState<ReturnSA<typeof User.login> | null>(null)
-    const [errorCount, setErrorCount] = React.useState(0)
+    const form = useRef<HTMLFormElement>(null)
+    const [error, setError] = useState<ClientError | null>(null)
+    const [errorCount, setErrorCount] = useState(0)
 
     const login = async (e: React.FormEvent) => {
         e.preventDefault()
-        if (nameInput.current && passInput.current && typeInput.current) {
-            const long = typeInput.current.checked
-            const currentError = await User.login(nameInput.current.value, passInput.current.value, long)
-            setError(currentError)
-            setErrorCount(currentError ? errorCount + 1 : 0)
-            if (currentError && error && currentError.code !== error.code) setErrorCount(1)
-        }
+        disableForm()
+        const data = new FormData(e.target as HTMLFormElement)
+        const name = data.get("name") as string
+        const pass = data.get("pass") as string
+        const long = Boolean(data.get("long"))
+        const $error = await User.login(name, pass, long)
+        setError($error!)
+        setErrorCount($error ? errorCount + 1 : 0)
+        if ($error && error && $error.code !== error.code) setErrorCount(1)
+        $error ? enableForm() : fadeOut()
     }
 
-    User.session.subscribe((session) => {
-        console.log(session)
-    })
+    async function disableForm() {
+        form.current!.style.opacity = "0.5"
+        form.current!.style.pointerEvents = "none"
+    }
+    async function enableForm() {
+        form.current!.style.opacity = "1"
+        form.current!.style.pointerEvents = "all"
+    }
+    async function fadeOut() {
+        form.current!.style.opacity = "0"
+    }
 
     return (
-        <div className="loginScreen z-1000 fixed left-0 top-0 h-screen w-screen overflow-auto">
+        <div className="z-1000 fixed left-0 top-0 h-screen w-screen overflow-auto bg-c1">
             <div className="absolute left-2/4 -translate-x-2/4 pb-28 pt-28">
-                <form onSubmit={login} className="w-[14rem]">
-                    <TextInputFancy type="text" label="Username" ref={nameInput} tabIndex={1} />
-                    <TextInputFancy type="password" label="Password" ref={passInput} tabIndex={2} />
+                <form onSubmit={login} className="w-56 transition-opacity duration-300" ref={form}>
+                    <TextInputFancy type="text" label="Username" name="name" tabIndex={1} />
+                    <TextInputFancy type="password" label="Password" name="pass" tabIndex={2} />
 
                     <div className="mt-6 flex items-center gap-4">
-                        <Switch ref={typeInput} tabIndex={3} />
-                        <label className={`inline text-sm ${typeInput}`}>Remember me</label>
+                        <Switch tabIndex={3} name="long" />
+                        <label className="inline text-sm">Remember me</label>
                     </div>
 
                     <button
@@ -48,9 +57,9 @@ export default function LoginScreen() {
                     </button>
 
                     {error && (
-                        <Card className="mt-10" icon="warning" iconClass="text-c3">
+                        <Card className="mt-10" icon="warning" iconClass="text-c3" iconPosition="top-center">
                             <p className="text-center text-sm">{error.message}</p>
-                            {errorCount > 1 && <span className="mt-2 block w-full text-center text-xs text-cp">(x{errorCount})</span>}
+                            {errorCount > 1 && <span className="mt-2 block w-full text-center text-xs text-cp">({errorCount})</span>}
                         </Card>
                     )}
                 </form>

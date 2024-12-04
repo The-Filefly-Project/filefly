@@ -1,25 +1,20 @@
 // Imports ========================================================================================
 
-import { createStore } from 'zustand'
+import { create }               from 'zustand' 
 import ClientError, { DepCode } from './Error'
-
-// Types ==========================================================================================
-
-import type { TSessionInfo } from '../../server/src/http/handlers/sessionInfo.get'
-type UserSession = Partial<TSessionInfo>
+import type { TSessionInfo }    from '../../server/src/http/handlers/sessionInfo.get'
 
 // Module ==========================================================================================
 
 export default class User {
 
-    public static session = createStore<UserSession>()(() => ({
+    public static session = create<Partial<TSessionInfo>>(() => ({
         username: undefined,
         root: undefined,
         type: undefined,
         createdISO: undefined,
         updatedISO: undefined,
     }))
-
 
     /**
      * Sends a login request. Returns `void` if successful and an error object if operation failed.

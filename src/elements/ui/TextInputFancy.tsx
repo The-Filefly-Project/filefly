@@ -2,6 +2,7 @@ import {forwardRef, HTMLInputTypeAttribute, useState} from "react"
 
 type TextInputAttributes = {
     type: HTMLInputTypeAttribute
+    name?: string
     label: string
     tabIndex?: number
 }
@@ -12,15 +13,11 @@ const TextInputFancy = forwardRef<HTMLInputElement, React.PropsWithChildren & Te
 
     const focus = () => setActive(true)
     const blur = () => setActive(false)
-
-    const style = {
-        transform: `translateY(${active || busy ? "0" : "1rem"})`,
-        color: active || busy ? "var(--c3)" : "var(--c3)"
-    }
-
     return (
         <>
-            <label className="pointer-events-none relative block text-xxs transition-all duration-150 ease-in-out" style={style}>
+            <label
+                className={`${active || busy ? "-translate-x-[5%] scale-90" : "translate-y-4"} pointer-events-none relative block text-xxs text-c3 transition-all duration-150 ease-in-out`}
+            >
                 {props.label}
             </label>
             <input
@@ -31,6 +28,7 @@ const TextInputFancy = forwardRef<HTMLInputElement, React.PropsWithChildren & Te
                 onBlur={blur}
                 onInput={(e) => setBusy(e.currentTarget.value)}
                 tabIndex={props.tabIndex}
+                name={props.name}
             />
         </>
     )

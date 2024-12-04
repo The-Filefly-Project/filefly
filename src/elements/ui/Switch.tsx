@@ -4,6 +4,7 @@ interface Props {
     checked?: boolean
     onChange?: (e: ChangeEvent<HTMLInputElement>) => any
     tabIndex?: number
+    name?: string
 }
 
 const Switch = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
@@ -23,6 +24,7 @@ const Switch = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
                 onChange={check}
                 ref={ref}
                 tabIndex={props.tabIndex}
+                name={props.name}
             />
             <span
                 className={`slider pointer-events-none absolute top-1 block h-4 w-4 rounded-full bg-c1 transition-all ${checked ? "left-6" : "left-1"}`}

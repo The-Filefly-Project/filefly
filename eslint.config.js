@@ -24,7 +24,9 @@ export default tseslint.config(
                 { allowConstantExport: true },
             ],
             "@typescript-eslint/no-explicit-any": "off",
-            "no-async-promise-executor": "off"
+            "@typescript-eslint/no-empty-object-type": 'off',
+            "@typescript-eslint/no-unused-expressions": 'off',
+            "no-async-promise-executor": "off",
         },
     },
 )
