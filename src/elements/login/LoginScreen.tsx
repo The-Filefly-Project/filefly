@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react"
+import React, {useEffect, useRef, useState} from "react"
 import User from "../../lib/User"
 import Switch from "../ui/Switch"
 import TextInputFancy from "../ui/TextInputFancy"
@@ -24,6 +24,13 @@ export default function LoginScreen() {
         $error ? enableForm() : fadeOut()
     }
 
+    useEffect(() => {
+        User.renewSession().then((error) => {
+            if (error) enableForm()
+            else fadeOut()
+        })
+    }, [])
+
     async function disableForm() {
         form.current!.style.opacity = "0.5"
         form.current!.style.pointerEvents = "none"
@@ -39,7 +46,7 @@ export default function LoginScreen() {
     return (
         <div className="z-1000 fixed left-0 top-0 h-screen w-screen overflow-auto bg-c1">
             <div className="absolute left-2/4 -translate-x-2/4 pb-28 pt-28">
-                <form onSubmit={login} className="w-56 transition-opacity duration-300" ref={form}>
+                <form onSubmit={login} className="pointer-events-none w-56 opacity-50 transition-opacity duration-300" ref={form}>
                     <TextInputFancy type="text" label="Username" name="name" tabIndex={1} />
                     <TextInputFancy type="password" label="Password" name="pass" tabIndex={2} />
 

@@ -8,8 +8,8 @@ import LoggerInstance   from "logging"
 import Util             from "./util.js"
 import Config           from "./config.js"
 import UserAccounts     from './userdb/userAccounts.js'
+import UserSession      from './userdb/userSessions.js'
 import HttpServer       from "./http/server.js"
-import UserSession from './userdb/userSessions.js'
 
 const dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
