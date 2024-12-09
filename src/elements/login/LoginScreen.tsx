@@ -4,6 +4,7 @@ import Switch from "../ui/Switch"
 import TextInputFancy from "../ui/TextInputFancy"
 import Card from "../ui/Card"
 import ClientError from "../../lib/Error"
+import Routing from "../../lib/Routing"
 
 export default function LoginScreen() {
     const form = useRef<HTMLFormElement>(null)
@@ -41,6 +42,8 @@ export default function LoginScreen() {
     }
     async function fadeOut() {
         form.current!.style.opacity = "0"
+        form.current!.style.pointerEvents = "none"
+        Routing.init()
     }
 
     return (

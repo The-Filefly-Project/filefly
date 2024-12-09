@@ -23,10 +23,7 @@ const sessionRenew: TRequestSetup = () => {
             // Limit SID length
             const sid = req.cookies.sid
             const parseStatus = ZSID.safeParse(sid)
-            if (parseStatus.success === false) {
-                out.debug(`Bad request body:`, parseStatus)
-                return res.status(400).end()
-            }
+            if (parseStatus.success === false) return res.status(401).end()
             
             const session = UserSession.renew(sid)
             res.status(session ? 200 : 401).end()
