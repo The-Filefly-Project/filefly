@@ -41,3 +41,12 @@ body {
     background: var(--c1);
     color: var(--c4);
 }
+
+h1, h2, h3, h4, h5, h6,
+p, a, span {
+    color: var(--c4);
+}
+
+/* .page {
+    @apply bg-red;
+} */

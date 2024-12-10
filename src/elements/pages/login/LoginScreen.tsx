@@ -1,12 +1,13 @@
 import React, {useEffect, useRef, useState} from "react"
-import User from "../../lib/User"
-import Switch from "../ui/Switch"
-import TextInputFancy from "../ui/TextInputFancy"
-import Card from "../ui/Card"
-import ClientError from "../../lib/Error"
-import Routing from "../../lib/Routing"
+import User from "../../../lib/User"
+import Switch from "../../ui/Switch"
+import TextInputFancy from "../../ui/TextInputFancy"
+import Card from "../../ui/Card"
+import ClientError from "../../../lib/Error"
+import Routing from "../../../lib/router/Routing"
 
 export default function LoginScreen() {
+    const screen = useRef<HTMLDivElement>(null)
     const form = useRef<HTMLFormElement>(null)
     const [error, setError] = useState<ClientError | null>(null)
     const [errorCount, setErrorCount] = useState(0)
@@ -17,7 +18,7 @@ export default function LoginScreen() {
         const data = new FormData(e.target as HTMLFormElement)
         const name = data.get("name") as string
         const pass = data.get("pass") as string
-        const long = Boolean(data.get("long"))
+        const long = !!data.get("long")
         const $error = await User.login(name, pass, long)
         setError($error!)
         setErrorCount($error ? errorCount + 1 : 0)
@@ -41,13 +42,16 @@ export default function LoginScreen() {
         form.current!.style.pointerEvents = "all"
     }
     async function fadeOut() {
-        form.current!.style.opacity = "0"
-        form.current!.style.pointerEvents = "none"
+        screen.current!.style.opacity = "0"
+        screen.current!.style.pointerEvents = "none"
         Routing.init()
     }
 
     return (
-        <div className="z-1000 fixed left-0 top-0 h-screen w-screen overflow-auto bg-c1">
+        <div
+            className="login-screen z-1000 fixed left-0 top-0 h-screen w-screen overflow-auto bg-c1 transition-opacity duration-300"
+            ref={screen}
+        >
             <div className="absolute left-2/4 -translate-x-2/4 pb-28 pt-28">
                 <form onSubmit={login} className="pointer-events-none w-56 opacity-50 transition-opacity duration-300" ref={form}>
                     <TextInputFancy type="text" label="Username" name="name" tabIndex={1} />
