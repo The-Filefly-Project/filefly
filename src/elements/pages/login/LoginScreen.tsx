@@ -4,7 +4,6 @@ import Switch from "../../ui/Switch"
 import TextInputFancy from "../../ui/TextInputFancy"
 import Card from "../../ui/Card"
 import ClientError from "../../../lib/Error"
-import Routing from "../../../lib/router/Routing"
 
 export default function LoginScreen() {
     const screen = useRef<HTMLDivElement>(null)
@@ -44,7 +43,6 @@ export default function LoginScreen() {
     async function fadeOut() {
         screen.current!.style.opacity = "0"
         screen.current!.style.pointerEvents = "none"
-        Routing.init()
     }
 
     return (

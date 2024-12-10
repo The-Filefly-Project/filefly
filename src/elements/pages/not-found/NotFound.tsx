@@ -11,7 +11,7 @@ export default function Page404() {
     }, [])
 
     useEffect(() => {
-        if (timer === 0) window.location.hash = "/"
+        if (timer === 0) window.location.hash = "/files"
     }, [timer])
 
     return (
