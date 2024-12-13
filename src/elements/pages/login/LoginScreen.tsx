@@ -49,6 +49,7 @@ export default function LoginScreen() {
         <div
             className="login-screen z-1000 fixed left-0 top-0 h-screen w-screen overflow-auto bg-c1 transition-opacity duration-300"
             ref={screen}
+            key="login-screen"
         >
             <div className="absolute left-2/4 -translate-x-2/4 pb-28 pt-28">
                 <form onSubmit={login} className="pointer-events-none w-56 opacity-50 transition-opacity duration-300" ref={form}>

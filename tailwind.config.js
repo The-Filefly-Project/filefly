@@ -22,6 +22,14 @@ export default {
             },
             borderWidth: {
                 1: '1px',
+            },
+            // To hell with mobile-first...
+            screens: {
+              'xs': {'max': '639px'},   // max-width: 639px
+              'sm': {'max': '767px'},   // max-width: 767px
+              'md': {'max': '1023px'},  // max-width: 1023px
+              'lg': {'max': '1279px'},  // max-width: 1279px
+              'xl': {'max': '1535px'},  // max-width: 1535px
             }
         },
     },
