@@ -21,7 +21,9 @@ export default function Page404() {
                 <h1 className="inline-block -translate-x-[1px] -translate-y-[1px] bg-c1 pb-3 pr-2 text-9xl font-semibold text-cp md:text-7xl">
                     404
                 </h1>
-                <p className="-translate-x-[1px] bg-c1 pb-2 leading-8 text-c3 md:text-sm">Could not find the requested page.</p>
+                <p className="-translate-x-[1px] bg-c1 pb-2 leading-8 text-c3 md:text-sm">
+                    Could not find the requested page.
+                </p>
 
                 <div className="go-back -translate-x-[1px] bg-c1 pb-8">
                     <p className="return mb-6 md:text-sm">

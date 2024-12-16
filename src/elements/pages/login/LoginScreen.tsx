@@ -5,14 +5,18 @@ import TextInputFancy from "../../ui/TextInputFancy"
 import Card from "../../ui/Card"
 import ClientError from "../../../lib/Error"
 
+// ! Possible improvement with tanstack query
 export default function LoginScreen() {
     const screen = useRef<HTMLDivElement>(null)
     const form = useRef<HTMLFormElement>(null)
+    const [visible, setVisible] = useState(true)
+    const [disabled, setDisabled] = useState(false)
     const [error, setError] = useState<ClientError | null>(null)
     const [errorCount, setErrorCount] = useState(0)
 
     const login = async (e: React.FormEvent) => {
         e.preventDefault()
+        if (disabled) return
         disableForm()
         const data = new FormData(e.target as HTMLFormElement)
         const name = data.get("name") as string
@@ -35,48 +39,63 @@ export default function LoginScreen() {
     async function disableForm() {
         form.current!.style.opacity = "0.5"
         form.current!.style.pointerEvents = "none"
+        setDisabled(true)
     }
     async function enableForm() {
         form.current!.style.opacity = "1"
         form.current!.style.pointerEvents = "all"
+        setDisabled(false)
     }
     async function fadeOut() {
         screen.current!.style.opacity = "0"
         screen.current!.style.pointerEvents = "none"
+        setTimeout(() => {
+            setVisible(false)
+        }, 300)
     }
 
     return (
-        <div
-            className="login-screen z-1000 fixed left-0 top-0 h-screen w-screen overflow-auto bg-c1 transition-opacity duration-300"
-            ref={screen}
-            key="login-screen"
-        >
-            <div className="absolute left-2/4 -translate-x-2/4 pb-28 pt-28">
-                <form onSubmit={login} className="pointer-events-none w-56 opacity-50 transition-opacity duration-300" ref={form}>
-                    <TextInputFancy type="text" label="Username" name="name" tabIndex={1} />
-                    <TextInputFancy type="password" label="Password" name="pass" tabIndex={2} />
-
-                    <div className="mt-6 flex items-center gap-4">
-                        <Switch tabIndex={3} name="long" />
-                        <label className="inline text-sm">Remember me</label>
-                    </div>
-
-                    <button
-                        type="submit"
-                        className="mt-10 block w-full rounded-lg border-2 border-c2 bg-transparent px-8 py-2 text-sm transition-colors hover:bg-c2"
-                        tabIndex={4}
+        visible && (
+            <div
+                className="login-screen z-1000 fixed left-0 top-0 h-screen w-screen overflow-auto bg-c1 transition-opacity duration-300"
+                ref={screen}
+                key="login-screen"
+            >
+                <div className="absolute left-2/4 -translate-x-2/4 pb-28 pt-28">
+                    <form
+                        onSubmit={login}
+                        className="pointer-events-none w-56 opacity-50 transition-opacity duration-300"
+                        ref={form}
                     >
-                        Login
-                    </button>
+                        <TextInputFancy type="text" label="Username" name="name" tabIndex={1} />
+                        <TextInputFancy type="password" label="Password" name="pass" tabIndex={2} />
 
-                    {error && (
-                        <Card className="mt-10" icon="warning" iconClass="text-c3" iconPosition="top-center">
-                            <p className="text-center text-sm">{error.message}</p>
-                            {errorCount > 1 && <span className="mt-2 block w-full text-center text-xs text-cp">({errorCount})</span>}
-                        </Card>
-                    )}
-                </form>
+                        <div className="mt-6 flex items-center gap-4">
+                            <Switch tabIndex={3} name="long" />
+                            <label className="inline text-sm">Remember me</label>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="mt-10 block w-full rounded-lg border-2 border-c2 bg-transparent px-8 py-2 text-sm transition-colors hover:bg-c2"
+                            tabIndex={4}
+                        >
+                            Login
+                        </button>
+
+                        {error && (
+                            <Card className="mt-10" icon="warning" iconClass="text-c3" iconPosition="top-center">
+                                <p className="text-center text-sm">{error.message}</p>
+                                {errorCount > 1 && (
+                                    <span className="mt-2 block w-full text-center text-xs text-cp">
+                                        ({errorCount})
+                                    </span>
+                                )}
+                            </Card>
+                        )}
+                    </form>
+                </div>
             </div>
-        </div>
+        )
     )
 }

@@ -1,0 +1,12 @@
+@tailwind components;
+
+@layer components {
+
+    .secdiv-sm {
+        @apply w-full h-[1px] bg-c2 my-1 
+    }
+    .secdiv-md {
+        @apply w-full h-[1px] bg-c2 my-5
+    }
+
+}
