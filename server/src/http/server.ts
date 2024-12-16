@@ -90,7 +90,12 @@ export default class HttpServer {
         router.get('/session/renew', sessionRenew())
         router.get('/session/info', sessionInfo())
 
-        router.get('/account/avatar' accountAvatar())
+        router.get('/account/avatar', accountAvatar())
+
+        const staticRoot = path.join(dirname, '../../../spa')
+        this.app.use(express.static(staticRoot, {
+            dotfiles: 'ignore'
+        }))
 
 
     }

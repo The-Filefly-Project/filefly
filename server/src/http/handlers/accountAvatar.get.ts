@@ -7,13 +7,12 @@ import logger from 'logging'
 
 // Module ===============================================================================
 
-
 const accountAvatar: TRequestSetup = () => {
     
     const out = logger.getScope(import.meta.url)
     out.debug('API handler setup.')
 
-    return async function(req, res) {
+    return async function(_, res) {
         try {
 
             // todo: implement avatar upload/download per user account
