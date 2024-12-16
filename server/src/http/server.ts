@@ -28,6 +28,9 @@ import sessionNew   from './handlers/sessionNew.post.js'
 import sessionRenew from './handlers/sessionRenew.get.js'
 import sessionInfo  from './handlers/sessionInfo.get.js'
 
+// ===== ACCOUNT ====
+import accountAvatar from './handlers/accountAvatar.get.js'
+
 // Code =======================================================================
 
 export default class HttpServer {
@@ -86,6 +89,8 @@ export default class HttpServer {
         router.post('/session/new', sessionNew())
         router.get('/session/renew', sessionRenew())
         router.get('/session/info', sessionInfo())
+
+        router.get('/account/avatar' accountAvatar())
 
 
     }

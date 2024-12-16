@@ -16,7 +16,9 @@ const Switch = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
     }
 
     return (
-        <div className={`switch relative inline-block h-6 w-11 rounded-full transition-all ${checked ? "bg-c4" : "bg-c2"}`}>
+        <div
+            className={`switch relative inline-block h-6 w-11 rounded-full transition-all ${checked ? "bg-c4" : "bg-c2"}`}
+        >
             <input
                 type="checkbox"
                 className="absolute h-6 w-11 cursor-pointer appearance-none rounded-full"
