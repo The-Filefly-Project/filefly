@@ -18,11 +18,17 @@ const dirname = url.fileURLToPath(new URL('.', import.meta.url))
 // Types ======================================================================
 
 import type { Request, Response, NextFunction } from 'express'
+import type { UserSessionEntry } from '../userdb/userSessions.js'
 
-export type TMiddleware                                     = (req: Request, res: Response, next: NextFunction) => any
-export type TRequestHandler<Req extends Request = Request>  = (req: Req, res: Response) => any
-export type TRequestSetup                                   = () => TRequestHandler
-export type TRequestWithSession                             = Request & { session: UserSessionEntry }
+export type TRequestHandler = (req: Request, res: Response) => any
+export type TMiddleware     = (req: Request, res: Response, next: NextFunction) => any
+export type TRequestSetup   = () => TRequestHandler
+
+declare module 'express' {
+    interface Request {
+        session?: UserSessionEntry
+    }
+}
 
 // Endpoints ==================================================================
 
@@ -37,7 +43,6 @@ import sessionInfo  from './handlers/sessionInfo.get.js'
 
 // ===== ACCOUNT ====
 import accountAvatar from './handlers/accountAvatar.get.js'
-import { UserSessionEntry } from '../userdb/userSessions.js'
 
 // Code =======================================================================
 

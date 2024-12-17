@@ -26,6 +26,9 @@ const sessionNew: TRequestSetup = () => {
     return async function (req, res) {
         try {
 
+            // Resolve a conflict if session is already active
+            if (req.session) return res.status(409).end()
+
             const parseStatus = ZRequestBody.safeParse(req.body)
             if (parseStatus.success === false) {
                 out.debug(`Bad request body:`, parseStatus)

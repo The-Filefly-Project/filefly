@@ -1,7 +1,7 @@
 // imports ==============================================================================
 
-import { TRequestSetup } from "../server.js"
-import UserSession, { UserSessionEntry } from "../../userdb/userSessions.js"
+import { TRequestHandler, TRequestSetup } from "../server.js"
+import { UserSessionEntry } from "../../userdb/userSessions.js"
 import logger from 'logging'
 
 // Types ================================================================================
@@ -10,6 +10,7 @@ export type TSessionInfo = Pick<
     UserSessionEntry,
     'username' | 'root' | 'type' | 'createdISO' | 'updatedISO'
 >
+
 // Module ===============================================================================
 
 const sessionRenew: TRequestSetup = () => {
@@ -17,13 +18,10 @@ const sessionRenew: TRequestSetup = () => {
     const out = logger.getScope(import.meta.url)
     out.debug('API handler setup.')
 
-    return async function(req, res) {
+    const renew: TRequestHandler = (req, res) => {
         try {
 
-            // Limit SID length
-            const sid = req.cookies.sid
-            const session = UserSession.get(sid)
-    
+            const session = req.session
             if (!session) return res.status(401).end()
             
             const info: TSessionInfo = {
@@ -42,6 +40,8 @@ const sessionRenew: TRequestSetup = () => {
             res.status(500).end()
         }
     }
+
+    return renew
 
 }
 
