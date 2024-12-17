@@ -3,8 +3,6 @@
 
 import c from "chalk"
 import Logger from 'logging'
-
-import type { Request, Response, NextFunction } from "express"
 import type { TMiddleware } from "../server.js"
 
 let out: ReturnType<typeof Logger.getScope>
@@ -28,26 +26,28 @@ export default class RequestLogger {
         if (code <= 599) return c.red(code)
     }
 
-    public static logger = ((req: Request, res: Response, next: NextFunction) => {
+    public static logger = (): TMiddleware => {
 
         out = Logger.getScope(import.meta.url)
 
-        const id = this.getRequestID()
-        const method = c.green(req.method)
-        const ip = c.grey(req.ip)
-        const url = req.originalUrl
-        const start = Date.now()
-        const blankStatus = c.grey('###')
-        const blankTime = c.grey("*****")
-        const reqSign = c.grey('req')
-        const resSign = c.whiteBright('res')
+        return (req, res, next) => {
+            const id = this.getRequestID()
+            const method = c.green(req.method)
+            const ip = c.grey(req.ip)
+            const url = req.originalUrl
+            const start = Date.now()
+            const blankStatus = c.grey('###')
+            const blankTime = c.grey("*****")
+            const reqSign = c.grey('req')
+            const resSign = c.whiteBright('res')
+        
+            out.http(`${id} ${reqSign} ${method} ${blankStatus} ${ip} ${blankTime} ${url}`)
+            res.on('finish', () => out.http(`${id} ${resSign} ${method} ${this.getStatusCodeColor(res.statusCode)} ${ip} ${c.whiteBright(Date.now()-start+'ms').padEnd(5)} ${url}`))
+        
+            next()
+        }
     
-        out.http(`${id} ${reqSign} ${method} ${blankStatus} ${ip} ${blankTime} ${url}`)
-        res.on('finish', () => out.http(`${id} ${resSign} ${method} ${this.getStatusCodeColor(res.statusCode)} ${ip} ${c.whiteBright(Date.now()-start+'ms').padEnd(5)} ${url}`))
-    
-        next()
-    
-    }) satisfies TMiddleware
+    }
 
 
 }

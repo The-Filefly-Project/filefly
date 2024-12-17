@@ -22,7 +22,7 @@ const sessionRenew: TRequestSetup = () => {
 
             // Limit SID length
             const sid = req.cookies.sid
-            const session = UserSession.renew(sid)
+            const session = UserSession.get(sid)
     
             if (!session) return res.status(401).end()
             

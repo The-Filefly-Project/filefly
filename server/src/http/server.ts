@@ -10,18 +10,25 @@ import SSL           from './ssl/ssl.js'
 import Logger        from 'logging'
 import bodyParser    from 'body-parser'
 import cookieParser  from 'cookie-parser'
-import requestLogger from './middleware/requestLogger.js'
+
 
 let out: ReturnType<typeof Logger.getScope>
 const dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 // Types ======================================================================
 
-export type TMiddleware     = (req: express.Request, res: express.Response, next: express.NextFunction) => any
-export type TRequestHandler = (req: express.Request, res: express.Response) => any
-export type TRequestSetup   = () => TRequestHandler
+import type { Request, Response, NextFunction } from 'express'
+
+export type TMiddleware                                     = (req: Request, res: Response, next: NextFunction) => any
+export type TRequestHandler<Req extends Request = Request>  = (req: Req, res: Response) => any
+export type TRequestSetup                                   = () => TRequestHandler
+export type TRequestWithSession                             = Request & { session: UserSessionEntry }
 
 // Endpoints ==================================================================
+
+// ==== MIDDLEWARE ====
+import requestLogger from './middleware/requestLogger.js'
+import sessionBind from './middleware/sessionBind.js'
 
 // ==== SESSION ====
 import sessionNew   from './handlers/sessionNew.post.js'
@@ -30,6 +37,7 @@ import sessionInfo  from './handlers/sessionInfo.get.js'
 
 // ===== ACCOUNT ====
 import accountAvatar from './handlers/accountAvatar.get.js'
+import { UserSessionEntry } from '../userdb/userSessions.js'
 
 // Code =======================================================================
 
@@ -83,16 +91,18 @@ export default class HttpServer {
 
         this.app.use(bodyParser.json())
         this.app.use(cookieParser())
-        this.app.use(requestLogger.logger)
+        this.app.use(requestLogger.logger())
         this.app.use('/api/v1', router)
 
+        router.get('*', sessionBind())
+        
         router.post('/session/new', sessionNew())
         router.get('/session/renew', sessionRenew())
         router.get('/session/info', sessionInfo())
 
         router.get('/account/avatar', accountAvatar())
 
-        const staticRoot = path.join(dirname, '../../../spa')
+        const staticRoot = path.join(dirname, '../../spa')
         this.app.use(express.static(staticRoot, {
             dotfiles: 'ignore'
         }))
