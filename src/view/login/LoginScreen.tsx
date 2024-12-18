@@ -1,11 +1,12 @@
 import React, {useEffect, useRef, useState} from "react"
-import User from "../../../lib/User"
-import Switch from "../../ui/Switch"
-import TextInputFancy from "../../ui/TextInputFancy"
-import Card from "../../ui/Card"
-import ClientError from "../../../lib/Error"
+import User from "../../lib/User"
+import Switch from "../../elements/ui/Switch"
+import UnderlinedInput from "../../elements/ui/UnderlinedInput"
+import Card from "../../elements/ui/Card"
+import ClientError from "../../lib/Error"
 
 // ! Possible improvement with tanstack query
+
 export default function LoginScreen() {
     const screen = useRef<HTMLDivElement>(null)
     const form = useRef<HTMLFormElement>(null)
@@ -67,8 +68,8 @@ export default function LoginScreen() {
                         className="pointer-events-none w-56 opacity-50 transition-opacity duration-300"
                         ref={form}
                     >
-                        <TextInputFancy type="text" label="Username" name="name" tabIndex={1} />
-                        <TextInputFancy type="password" label="Password" name="pass" tabIndex={2} />
+                        <UnderlinedInput type="text" label="Username" name="name" tabIndex={1} />
+                        <UnderlinedInput type="password" label="Password" name="pass" tabIndex={2} />
 
                         <div className="mt-6 flex items-center gap-4">
                             <Switch tabIndex={3} name="long" />

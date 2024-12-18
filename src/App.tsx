@@ -1,10 +1,8 @@
 /// <reference types="../helpers.d.ts"/>
 
-import LoginScreen from "./elements/pages/login/LoginScreen"
-import FileExplorer from "./elements/pages/explorer/FileExplorer"
-import Page404 from "./elements/pages/not-found/NotFound"
-import Sidebar from "./elements/parts/sidebar/Sidebar"
-import Navbar from "./elements/parts/navbar/Navbar"
+import LoginScreen from "./view/login/LoginScreen"
+import Home from "./view/home/Home"
+import Sidebar from "./view/sidebar/Sidebar"
 
 import {Routes, Route, Navigate, useLocation} from "react-router"
 import {useEffect} from "react"
@@ -22,16 +20,14 @@ export default function App() {
     return (
         <>
             <LoginScreen />
-            <div className="app-container flex sm:block">
+            <div className="flex sm:block">
                 {session.username && (
                     <>
                         <Sidebar />
                         <div className="w-full">
-                            <Navbar />
                             <Routes key={location.key} location={location.pathname}>
                                 <Route path="/" element={<Navigate to="/files" replace />} />
-                                <Route path="/files" element={<FileExplorer />} />
-                                <Route path="*" element={<Page404 />} />
+                                <Route path="/files" element={<Home />} />
                             </Routes>
                         </div>
                     </>
